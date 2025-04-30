@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>《遺忘月台的米香記憶》活動報名</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", sans-serif;
+      background-color: #f9f6f2;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 80px auto;
+      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #7a5313;
+    }
+
+    p {
+      font-size: 14px;
+      color: #333;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      background-color: #d28800;
+      color: white;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #b06e00;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>《遺忘月台的米香記憶》活動報名</h2>
+    <p>僅限例假日與國定假日<br>上午 11:00／下午 1:30<br>每場最多 20 人，額滿為止</p>
+
+    <form>
+      <label for="name">姓名</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="date">選擇報名日期</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="time">選擇場次</label>
+      <select id="time" name="time" required>
+        <option value="">請選擇</option>
+        <option value="11:00">上午 11:00</option>
+        <option value="13:30">下午 1:30</option>
+      </select>
+
+      <button type="submit">送出報名</button>
+    </form>
+  </div>
+
+  <script>
+    // 限制日期只能選擇假日（六日）和指定國定假日
+    const dateInput = document.getElementById("date");
+
+    const nationalHolidays = [
+      "2025-05-01", // 勞動節
+      "2025-06-09", // 端午節
+      "2025-09-17", // 中秋節
+      "2025-10-10"  // 國慶日
+    ];
+
+    dateInput.addEventListener("input", function () {
+      const selected = new Date(this.value);
+      const day = selected.getDay(); // 0: Sunday, 6: Saturday
+
+      const formatted = this.value;
+      const isHoliday = nationalHolidays.includes(formatted);
+      const isWeekend = day === 0 || day === 6;
+
+      if (!isWeekend && !isHoliday) {
+        alert("僅限報名例假日或國定假日！");
+        this.value = ""; // 清除不合法日期
+      }
+    });
+  </script>
+</body>
+</html>
